@@ -1,0 +1,493 @@
+/*======================================================
+  1. ESTILOS GLOBALES Y VARIABLES
+======================================================*/
+:root {
+    --primary-color: #ff1900; 
+    --secondary-color: #f1c40f; 
+    --dark-color: #fa9600; 
+    --light-color: #ecf0f1; 
+    --text-color: #2c3e50;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    background-color: var(--light-color);
+    color: var(--text-color);
+    scroll-behavior: smooth;
+}
+
+/*======================================================
+  2. ESTRUCTURA PRINCIPAL (HEADER, NAV, CONTENIDO)
+======================================================*/
+
+.header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header-logo {
+    max-width: 180px;
+    height: auto;
+    margin-bottom: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.header p { margin-top: 0; }
+
+.service-selector {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.service-btn {
+    padding: 10px 15px;
+    border: 2px solid var(--light-color);
+    background-color: transparent;
+    color: var(--light-color);
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.service-btn.active {
+    background-color: var(--secondary-color);
+    color: var(--text-color); 
+    border-color: var(--secondary-color);
+}
+
+.service-btn:hover:not(.active) {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+#menu-nav {
+    position: sticky;
+    top: 0;
+    background-color: var(--dark-color);
+    padding: 10px 0;
+    text-align: center;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    overflow-x: auto;
+    white-space: nowrap;
+    width: 100%;
+}
+
+#menu-nav a {
+    color: var(--light-color);
+    text-decoration: none;
+    padding: 8px 15px;
+    margin: 0 5px;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+    font-size: 0.9em;
+    display: inline-block;
+}
+
+#menu-nav a:hover, #menu-nav a.active {
+    background-color: var(--primary-color);
+}
+
+.menu-section {
+    padding: 20px 10px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.menu-section h2 {
+    font-size: 2.5em;
+    color: var(--primary-color);
+    text-align: center;
+    border-bottom: 3px solid var(--secondary-color);
+    padding-bottom: 10px;
+    margin-top: 30px;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 20px 0;
+}
+
+/*======================================================
+  3. COMPONENTES: TARJETAS Y BOTONES
+======================================================*/
+
+.product-card {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.product-info { padding: 15px; }
+
+.product-info h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.2em;
+    color: var(--text-color);
+}
+
+.product-info p {
+    font-size: 0.9em;
+    color: #7f8c8d;
+    margin-bottom: 10px;
+}
+
+.price-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.price {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.add-to-cart {
+    background-color: var(--secondary-color);
+    border: none;
+    color: var(--text-color);
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.add-to-cart:hover {
+    background-color: #f39c12; 
+}
+
+.cart-floating {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--dark-color);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    font-weight: bold;
+    z-index: 10000;
+}
+
+/*======================================================
+  4. MODALES (CARRITO, OPCIONES Y CHECKOUT)
+======================================================*/
+
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 10% auto;
+    padding: 30px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+@keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+}
+
+.close-button {
+    color: var(--text-color);
+    float: right;
+    font-size: 35px;
+    font-weight: bold;
+    line-height: 20px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.modal-content h2, .modal-content h3 {
+    color: var(--text-color);
+    margin-top: 0;
+}
+
+.cart-service-info {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: var(--primary-color);
+    background-color: var(--light-color);
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    text-align: center;
+    border: 1px dashed var(--secondary-color);
+}
+
+/* Ítems del carrito con botón de borrar */
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    padding: 10px 0;
+    border-bottom: 1px dashed #ddd;
+    font-size: 1.1em;
+}
+
+.cart-item .item-details {
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 1; 
+    margin-right: 15px;
+}
+
+.delete-item-btn {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    cursor: pointer;
+    font-size: 1.2em;
+    padding: 0 5px;
+    transition: transform 0.2s;
+}
+
+.delete-item-btn:hover {
+    transform: scale(1.1);
+}
+
+.cart-summary {
+    border-top: 2px solid var(--secondary-color);
+    padding-top: 15px;
+    margin-top: 20px;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: right;
+}
+
+.checkout-button {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.checkout-button:hover {
+    background-color: #c0392b;
+}
+
+.empty-cart-message {
+    color: #7f8c8d;
+    text-align: center;
+    padding: 30px 0;
+}
+
+/* Estilos de formulario (Checkout) */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+.form-group input[type="text"],
+.form-group input[type="tel"],
+.form-group input[type="number"],
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; 
+    font-size: 1em;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+/* Input de teléfono con prefijo +52 */
+.phone-input-group {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 0;
+    overflow: hidden;
+}
+
+.phone-input-group .prefix {
+    background-color: var(--light-color);
+    padding: 10px 8px;
+    font-weight: bold;
+    color: var(--text-color);
+    border-right: 1px solid #ccc;
+}
+
+.phone-input-group input {
+    border: none;
+    flex-grow: 1;
+    padding: 10px;
+}
+
+/* Línea de dirección (Calle y Número) */
+.address-line {
+    display: flex;
+    gap: 10px;
+}
+
+.address-line .address-item {
+    flex-grow: 1;
+}
+
+.address-line .small-input {
+    flex-grow: 0.5;
+    max-width: 40%;
+}
+
+/* Botón de ubicación */
+.secondary-btn {
+    background-color: var(--dark-color);
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 5px;
+    transition: background-color 0.3s;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.secondary-btn:hover {
+    background-color: #d17d00;
+}
+
+.location-status {
+    font-size: 0.9em;
+    color: var(--primary-color);
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.pickup-info p {
+    background-color: var(--secondary-color);
+    padding: 15px;
+    border-radius: 5px;
+    color: var(--text-color);
+    font-size: 0.95em;
+    text-align: center;
+}
+
+/* Estilos Específicos del Modal Cerrado */
+.closed-content {
+    background-color: #fce4e4; 
+    border: 3px solid var(--primary-color);
+    text-align: center; 
+}
+
+.closed-image {
+    width: 100%; 
+    max-width: 250px;
+    height: auto;
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+
+.closed-title {
+    color: var(--primary-color);
+    font-size: 1.8em;
+    margin-bottom: 5px;
+}
+
+.closed-message {
+    color: #333;
+    font-size: 1.1em;
+    line-height: 1.5;
+}
+
+/*======================================================
+  5. RESPONSIVIDAD (MEDIA QUERIES)
+======================================================*/
+
+@media (max-width: 768px) {
+    .header-logo { max-width: 140px; }
+    .service-btn { padding: 8px 10px; font-size: 0.85em; }
+    .menu-section { padding: 15px 10px; }
+    .menu-grid { grid-template-columns: 1fr; gap: 20px; }
+    .menu-section h2 { font-size: 2em; }
+}
+
+@media (max-width: 480px) {
+    .header { padding: 15px 10px; }
+    #menu-nav a { padding: 5px 10px; font-size: 0.8em; }
+    .product-info h3 { font-size: 1.1em; }
+    .cart-floating { bottom: 10px; right: 10px; padding: 10px 15px; font-size: 0.8em; }
+    .modal-content { width: 95%; margin: 5% auto; padding: 15px; }
+    .modal-content h2 { font-size: 1.6em; }
+    
+    .cart-item .item-details {
+        flex-direction: column; 
+    }
+    .cart-item span:last-child {
+        font-size: 0.9em;
+        color: #7f8c8d;
+    }
+    .delete-item-btn { font-size: 1em; }
+
+    .address-line {
+        flex-direction: column;
+        gap: 0;
+    }
+    .address-line .small-input {
+        max-width: 100%;
+    }
+}

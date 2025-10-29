@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fast Burger - Tenancingo 🌟</title>
+    <link rel="stylesheet" href="styles.css"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    </head>
+<body>
+    <header class="header">
+        <img src="images/logo.png" alt="Logo de Fast Burger" class="header-logo"> 
+        <p>TENANCINGO</p>
+        
+        <div class="service-selector">
+            <button id="delivery-btn" class="service-btn active">
+                🛵 Servicio a Domicilio
+            </button>
+            <button id="pickup-btn" class="service-btn">
+                🚶 Pasar a Recoger
+            </button>
+        </div>
+    </header>
+    
+    <nav id="menu-nav">
+    </nav>
+
+    <main id="menu-container" class="menu-grid">
+    </main>
+
+    <div class="cart-floating">🛒 Ver Pedido</div>
+
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>🛒 Tu Pedido</h2>
+            
+            <div id="selected-service-display" class="cart-service-info"></div>
+            
+            <div id="cart-items">
+                <p class="empty-cart-message">Tu carrito está vacío.</p>
+            </div>
+            
+            <div class="cart-summary">
+                <p>Total: <span id="cart-total">MX$0.00</span></p>
+            </div>
+            <button class="checkout-button">Continuar</button> 
+        </div>
+    </div>
+
+    <div id="options-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="close-options-modal">&times;</span>
+            <h2 id="options-modal-title">Selecciona tu Salsa</h2>
+            <div id="options-content"></div>
+            <button class="checkout-button" id="add-to-cart-with-options">Añadir al Pedido</button>
+        </div>
+    </div>
+    
+    <div id="checkout-modal" class="modal">
+        <div class="modal-content checkout-content">
+            <span class="close-button" id="close-checkout-modal">&times;</span>
+            <h2>📍 Confirma tu Pedido y Pago</h2>
+            
+            <div class="form-group">
+                <label for="checkout-name">Nombre y Apellido:</label>
+                <input type="text" id="checkout-name" required>
+            </div>
+            <div class="form-group">
+                <label for="checkout-phone">Teléfono (WhatsApp):</label>
+                <div class="phone-input-group">
+                    <span class="prefix">+52</span>
+                    <input type="tel" id="checkout-phone" required maxlength="10">
+                </div>
+            </div>
+            
+            <div id="checkout-address-fields" class="address-fields">
+                <h3>Detalles de la Dirección</h3>
+                
+                <div class="form-group location-group">
+                    <label>Ubicación (Arrastra el marcador):</label>
+                    <div id="map-container" style="height: 300px; width: 100%; margin-bottom: 10px; border-radius: 5px;"></div>
+                    <p id="location-display" class="location-status">Ubicación: No definida</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="checkout-colony">Colonia:</label>
+                    <input type="text" id="checkout-colony" required>
+                </div>
+                <div class="form-group address-line">
+                    <div class="address-item">
+                        <label for="checkout-street">Calle:</label>
+                        <input type="text" id="checkout-street" required>
+                    </div>
+                    <div class="address-item small-input">
+                        <label for="checkout-number">Número (Casa, Depto, Edificio):</label>
+                        <input type="text" id="checkout-number" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="checkout-between">Entre calles (Opcional):</label>
+                    <input type="text" id="checkout-between">
+                </div>
+                <div class="form-group">
+                    <label for="checkout-references">Referencias (Opcional):</label>
+                    <textarea id="checkout-references" rows="2"></textarea>
+                </div>
+            </div>
+
+            <div id="checkout-pickup-info" style="display:none;" class="pickup-info">
+                <p>⚠️ **Recuerda:** Tu pedido estará listo para recoger en la dirección del restaurante. Te avisaremos por WhatsApp cuando esté listo.</p>
+            </div>
+            
+            <h3>Método de Pago</h3>
+            <div class="form-group">
+                <select id="payment-method" required>
+                    <option value="efectivo">Efectivo 💵</option>
+                    <option value="tarjeta">Tarjeta (Cobro a la entrega) 💳</option>
+                </select>
+            </div>
+
+            <div class="form-group" id="cash-payment-info">
+                <label for="cash-amount">Pagas con (Para el cambio):</label>
+                <input type="number" id="cash-amount" placeholder="Ej: 200" min="0">
+            </div>
+            
+            <div class="form-group">
+                <label for="checkout-notes">Notas Adicionales (Opcional):</label>
+                <textarea id="checkout-notes" rows="3"></textarea>
+            </div>
+            
+            <button class="checkout-button" id="checkout-continue-btn">
+                Enviar Pedido por WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <div id="closed-modal" class="modal">
+        <div class="modal-content closed-content">
+            <span class="close-button" id="close-closed-modal">&times;</span>
+            <img src="images/cerrado.png" alt="Restaurante Cerrado" class="closed-image"> 
+            <h2 class="closed-title">¡Lo Sentimos! 😥</h2>
+            <p class="closed-message">Nuestro horario de atención finaliza a las 11:00 PM.</p>
+            <p class="closed-message">¡Te esperamos mañana con más Fast Burger! 🍔</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script> 
+    <script 
+        async 
+        defer 
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLf0pbF3PJ_phquHu9o0sK5dVWOqI0zus_&callback=initMap&libraries=places&v=weekly">
+    </script>
+    
+</body>
+</html>
