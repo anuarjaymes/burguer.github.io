@@ -459,8 +459,7 @@ function checkClosingTime() {
     const currentHour = now.getHours(); 
     const currentMinute = now.getMinutes();
     
-    const HORA_CIERRE = 21; // 11:00 PM
-    const MINUTO_CIERRE = 20; 
+    const HORA_CIERRE = 23; // 11:00 PM
     const HORA_APERTURA = 12; // 12:45 PM
     const MINUTO_APERTURA = 45;
 
@@ -606,3 +605,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 });
+
