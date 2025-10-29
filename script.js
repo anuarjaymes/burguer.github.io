@@ -440,8 +440,8 @@ function buildWhatsAppMessage() {
         message += `\n*Notas Adicionales:*\n ${checkoutNotes.value}\n`;
     }
     
-    // Abre WhatsApp. Reemplaza 527221234567 con el número real.
-    const whatsappLink = `https://api.whatsapp.com/send?phone=527221234567&text=${encodeURIComponent(message)}`;
+    // Abre WhatsApp. Reemplaza 52123456789 con el número real.
+    const whatsappLink = `https://api.whatsapp.com/send?phone=527225016172&text=${encodeURIComponent(message)}`;
     
     window.open(whatsappLink, '_blank');
 
@@ -459,7 +459,8 @@ function checkClosingTime() {
     const currentHour = now.getHours(); 
     const currentMinute = now.getMinutes();
     
-    const HORA_CIERRE = 23; // 11:00 PM
+    const HORA_CIERRE = 21; // 11:00 PM
+    const MINUTO_CIERRE = 20; 
     const HORA_APERTURA = 12; // 12:45 PM
     const MINUTO_APERTURA = 45;
 
@@ -603,4 +604,5 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.target === closedModal) { closeClosedModal(); }
         if (event.target === checkoutModal) { closeCheckoutModal(); }
     });
+
 });
